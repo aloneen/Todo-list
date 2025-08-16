@@ -21,7 +21,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ToDoList" id="MHx-hj-XSJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="kRu-jM-oaD"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="kRu-jM-oaD">
+                            <connections>
+                                <action selector="pushAddAction:" destination="uk8-q3-Ynw" id="tx6-hx-St1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0A-sc-Yp4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

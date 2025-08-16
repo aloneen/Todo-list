@@ -7,6 +7,8 @@
 
 import UIKit
 
+var todolist: [String] = ["1", "2", "3"]
+
 class TodoListController: UITableViewController {
 
     override func viewDidLoad() {
@@ -20,26 +22,33 @@ class TodoListController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    
+    
+    @IBAction func pushAddAction(_ sender: Any) {
     }
+    
+    
+
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return todolist.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = UITableViewCell()
+        
+        var configuration = UIListContentConfiguration.cell()
+        configuration.text = todolist[indexPath.row]
+        
+        cell.contentConfiguration = configuration
+        
         // Configure the cell...
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
