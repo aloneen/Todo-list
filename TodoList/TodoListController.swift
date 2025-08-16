@@ -7,9 +7,11 @@
 
 import UIKit
 
-var todolist: [String] = ["1", "2", "3"]
+
 
 class TodoListController: UITableViewController {
+    
+    var model = Model()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,7 @@ class TodoListController: UITableViewController {
     
     @IBAction func pushAddAction(_ sender: Any) {
         TextPicker().showPicker(in: self){ [weak self]text in
-            todolist.append(text)
+            self?.model.addItem(title: text)
             self?.tableView.reloadData()
         }
     }
@@ -36,7 +38,7 @@ class TodoListController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return todolist.count
+        return model.items.count
     }
 
     
@@ -44,7 +46,7 @@ class TodoListController: UITableViewController {
         let cell = UITableViewCell()
         
         var configuration = UIListContentConfiguration.cell()
-        configuration.text = todolist[indexPath.row]
+        configuration.text = model.items[indexPath.row].title
         
         cell.contentConfiguration = configuration
         
@@ -60,8 +62,7 @@ class TodoListController: UITableViewController {
             in
             
             TextPicker().showPicker(in: self){ [weak self]text in
-                todolist.remove(at: indexPath.row)
-                todolist.insert(text, at: indexPath.row)
+                self?.model.renameItem(at: indexPath.row, newTitle: text)
                 self?.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
             
@@ -77,7 +78,7 @@ class TodoListController: UITableViewController {
         let action = UIContextualAction(style: .destructive, title: "Delete") { _, _,
             completion
             in
-            todolist.remove(at: indexPath.row)
+            self.model.deleteItem(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             completion(true)
         }
