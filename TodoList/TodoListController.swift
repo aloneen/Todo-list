@@ -58,8 +58,13 @@ class TodoListController: UITableViewController {
         let action = UIContextualAction(style: .normal, title: "Rename") { _, _,
             completion
             in
-            todolist[indexPath.row] = "renamed"
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+            
+            TextPicker().showPicker(in: self){ [weak self]text in
+                todolist.remove(at: indexPath.row)
+                todolist.insert(text, at: indexPath.row)
+                self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            
             completion(true)
         }
         
