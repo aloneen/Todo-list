@@ -25,8 +25,9 @@ class TodoListController: UITableViewController {
     
     
     @IBAction func pushAddAction(_ sender: Any) {
-        todolist.append("New row")
-        tableView.reloadData()
+        TextPicker().showPicker(in: self)
+//        todolist.append("New row")
+//        tableView.reloadData()
     }
     
     
