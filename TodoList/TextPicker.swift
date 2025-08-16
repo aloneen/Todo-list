@@ -11,7 +11,7 @@ import UIKit
 class TextPicker {
     
     
-    func showPicker(in viewController: UIViewController) {
+    func showPicker(in viewController: UIViewController, completion: @escaping((String)->Void) ) {
         let alertController = UIAlertController(title: "TodoItem", message: nil, preferredStyle: .alert)
         
         
@@ -19,7 +19,9 @@ class TextPicker {
         alertController.addTextField()
         
         let actionOk = UIAlertAction(title: "Ok", style: .default) { _ in
-            
+            if let text = alertController.textFields?[0].text, text != "" {
+                completion(text)
+            }
         }
         
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel)
