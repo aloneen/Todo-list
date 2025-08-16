@@ -66,7 +66,16 @@ class TodoListController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        return nil
+        
+        let action = UIContextualAction(style: .destructive, title: "Delete") { _, _,
+            completion
+            in
+            todolist.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            completion(true)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [action])
     }
 
 }
