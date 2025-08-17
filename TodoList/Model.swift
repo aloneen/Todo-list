@@ -39,5 +39,9 @@ class Model {
     }
     
     
+    func toggleCompletion(at index: Int) {
+        items[index].isCompleted.toggle()
+    }
+    
     
 }

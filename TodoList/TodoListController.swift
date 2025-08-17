@@ -46,11 +46,17 @@ class TodoListController: UITableViewController {
         let cell = UITableViewCell()
         
         var configuration = UIListContentConfiguration.cell()
+        
         configuration.text = model.items[indexPath.row].title
+        configuration.secondaryText = model.items[indexPath.row].date.formatted(date: .complete, time: .shortened)
+        
+        
         
         cell.contentConfiguration = configuration
         
         // Configure the cell...
+        
+        cell.accessoryType = model.items[indexPath.row].isCompleted ? .checkmark : .none
 
         return cell
     }
@@ -84,6 +90,12 @@ class TodoListController: UITableViewController {
         }
         
         return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        model.toggleCompletion(at: indexPath.row)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 
 }
